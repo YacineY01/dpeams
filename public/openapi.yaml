@@ -1,0 +1,45 @@
+openapi: 3.0.1
+info:
+  title: File Analyzer Plugin
+  description: A plugin for uploading and querying files using AI.
+  version: 'v1'
+servers:
+  - url: https://your-domain.com
+paths:
+  /api/query:
+    post:
+      operationId: queryFiles
+      summary: Search through uploaded files
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: The search query
+                top_k:
+                  type: integer
+                  description: Number of results to return
+                  default: 5
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        content:
+                          type: string
+                        metadata:
+                          type: object
+                        similarity:
+                          type: number
